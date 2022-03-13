@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "dwslaPzUsR8JK8XzqiiYT62Pq2tFzM1qMR9kwsEkXoGBZXP8t/C0uMPVmTFPcGq80dQQonBttik6cXOWYIbDqg==",
+  "success": true,
+  "projectFilePath": "/Users/gibson/Workspace/DotNet/First-Project/First-Project.csproj",
+  "expectedPackageFiles": [
+    "/Users/gibson/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/Users/gibson/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/Users/gibson/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "/Users/gibson/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "/Users/gibson/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/Users/gibson/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
