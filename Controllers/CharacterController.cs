@@ -39,6 +39,18 @@ namespace First_Project.Controllers
     {
       return Ok(await _characterService.AddCharacter(newCharacter));
     }
+    
+    [HttpPost("Skill")]
+    public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> AddCharacter(AddCharacterSkillDto newCharacterSkill)
+    {
+      var result = await _characterService.AddCharacterSkill(newCharacterSkill);
+      if (!result.Success)
+      {
+        return NotFound(result);
+      }
+      return Ok(result);
+    }
+
 
     [HttpPut]
     public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> UpdateCharacter(UpdateCharacterDto updateCharacter)

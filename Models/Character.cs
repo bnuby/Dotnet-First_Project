@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using First_Project.Migrations;
 
 namespace First_Project.Models
 {
@@ -20,6 +21,8 @@ namespace First_Project.Models
     public User User { get; set; }
 
     public Weapon Weapon { get; set; }
+
+    public List<Skill> Skills { get; set; }
 
   }
 }
