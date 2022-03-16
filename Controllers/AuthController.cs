@@ -20,7 +20,7 @@ namespace First_Project.Controllers
     public async Task<ActionResult<ServiceResponse<int>>> Login(UserLoginDto request)
     {
       var response = await _authRepo.Login(request.Username, request.Password);
-      if (response.Success)
+      if (!response.Success)
       {
         return BadRequest(response);
       }
@@ -35,7 +35,7 @@ namespace First_Project.Controllers
         Username = request.Username
       };
       var response = await _authRepo.Register(user, request.Password);
-      if (response.Success)
+      if (!response.Success)
       {
         return BadRequest(response);
       }

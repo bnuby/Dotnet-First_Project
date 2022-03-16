@@ -1,10 +1,13 @@
+using System.Security.Claims;
 using First_Project.Dtos.Character;
 using First_Project.Models;
 using First_Project.Services.CharacterService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace First_Project.Controllers
 {
+  [Authorize]
   [ApiController]
   [Route("[controller]")]
   public class CharacterController : ControllerBase
