@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using First_Project.Services.WeaponService;
+using First_Project.Services.FightService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,7 @@ var Service = builder.Services;
 Service.AddScoped<ICharacterService, CharacterService>();
 Service.AddScoped<IAuthRepository, AuthRepository>();
 Service.AddScoped<IWeaponService, WeaponService>();
+Service.AddScoped<IFightService, FightService>();
 
 Service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
   .AddJwtBearer(options =>

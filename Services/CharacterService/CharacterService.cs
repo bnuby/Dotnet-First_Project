@@ -63,6 +63,16 @@ namespace First_Project.Services.CharacterService
       return serviceResponse;
     }
 
+    public async Task<Character> GetRawCharacterById(int id)
+    {
+      var serviceResponse = new ServiceResponse<GetCharacterDto>();
+      var character = await _context.Characters
+        .Include(c => c.Weapon)
+        .Include(c => c.Skills)
+        .FirstOrDefaultAsync(c => c.Id == id);
+      return character;
+    }
+
     public async Task<ServiceResponse<GetCharacterDto>> UpdateCharacter(UpdateCharacterDto updateCharacter)
     {
       var serviceResponse = new ServiceResponse<GetCharacterDto>();
