@@ -1,0 +1,7 @@
+namespace First_Project.Dtos.Fight
+{
+    public class FightRequestDto
+    {
+        public List<int> CharacterIds { get; set; }
+    }
+}

@@ -25,5 +25,38 @@ namespace First_Project.Controllers
         }
         return Ok(result);
     }
+
+    [HttpPost("Skill")]
+    public async Task<ActionResult<ServiceResponse<AttackResultDto>>> SkillAttack(SkillAttackDto request)
+    {
+        var result = await _fightService.SkillAttack(request);
+        if (!result.Success)
+        {
+            return BadRequest(result);
+        }
+        return Ok(result);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<ServiceResponse<FightResultDto>>> Fight(FightRequestDto request)
+    {
+        var result = await _fightService.Fight(request);
+        if (!result.Success)
+        {
+            return BadRequest(result);
+        }
+        return Ok(result);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<ServiceResponse<List<HighscoreDto>>>> GetHighscore()
+    {
+        var result = await _fightService.GetHighscore();
+        if (!result.Success)
+        {
+            return BadRequest(result);
+        }
+        return Ok(result);
+    }
   }
 }
