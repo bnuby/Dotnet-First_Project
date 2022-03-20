@@ -49,7 +49,7 @@ namespace First_Project.Data
         response.Message = "User already exists.";
         return response;
       }
-      CreatePasswrodHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+      Utility.CreatePasswrodHash(password, out byte[] passwordHash, out byte[] passwordSalt);
       user.PasswordHash = passwordHash;
       user.PasswordSalt = passwordSalt;
       _context.Users.Add(user);
@@ -65,15 +65,6 @@ namespace First_Project.Data
         return true;
       }
       return false;
-    }
-
-    private void CreatePasswrodHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-    {
-      using (var hmac = new System.Security.Cryptography.HMACSHA512())
-      {
-        passwordSalt = hmac.Key;
-        passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-      }
     }
 
     private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
@@ -97,7 +88,8 @@ namespace First_Project.Data
       var claims = new List<Claim>
       {
         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        new Claim(ClaimTypes.Name, user.Username)
+        new Claim(ClaimTypes.Name, user.Username),
+        new Claim(ClaimTypes.Role, user.Role)
       };
 
       var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));

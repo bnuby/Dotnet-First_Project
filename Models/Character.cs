@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using First_Project.Migrations;
 
 namespace First_Project.Models
 {
@@ -19,6 +18,8 @@ namespace First_Project.Models
     public RpgClass Class { get; set; } = RpgClass.Knight;
 
     public User User { get; set; }
+
+    public int UserId { get; set; }
 
     public Weapon Weapon { get; set; }
 

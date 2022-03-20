@@ -1,13 +1,16 @@
-using First_Project.Data;
 using Microsoft.EntityFrameworkCore;
-using First_Project.Services.CharacterService;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Swashbuckle.AspNetCore.Filters;
+
+using First_Project.Data;
+using First_Project.Services.CharacterService;
 using First_Project.Services.WeaponService;
 using First_Project.Services.FightService;
 
@@ -15,9 +18,23 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var Configuration = builder.Configuration;
-var connection = Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
-Console.WriteLine("Write Line {0}", connection);
+
+// Add Server connection
+
+var useSqlite = Boolean.Parse(Configuration.GetSection("AppSettings:useSqlite").Value);
+String connection;
+if (useSqlite)
+{
+  connection = Configuration.GetConnectionString("SqliteConnection");
+  builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(connection));
+}
+else
+{
+  connection = Configuration.GetConnectionString("DefaultConnection");
+  builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connection));
+}
+Console.WriteLine($"~ connection: {connection}");
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

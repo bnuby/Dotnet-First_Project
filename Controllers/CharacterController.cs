@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace First_Project.Controllers
 {
-  [Authorize]
+  [Authorize(Roles = "Admin")]
   [ApiController]
   [Route("[controller]")]
   public class CharacterController : ControllerBase

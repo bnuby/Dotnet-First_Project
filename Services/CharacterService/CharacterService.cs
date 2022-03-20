@@ -23,6 +23,7 @@ namespace First_Project.Services.CharacterService
     }
 
     private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+    private string GetUserRole() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
 
     public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter)
     {
@@ -42,10 +43,12 @@ namespace First_Project.Services.CharacterService
     public async Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters()
     {
       var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
+      var isAdmin = GetUserRole().Contains("Admin");
       var characters = await _context.Characters
+        .Where(c => isAdmin ? true : c.User.Id == GetUserId())
         .Include(c => c.Weapon)
         .Include(c => c.Skills)
-        .Where(c => c.User.Id == GetUserId()).ToListAsync();
+        .ToListAsync();
       serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
       serviceResponse.Message = "Get all characters";
       return serviceResponse;
